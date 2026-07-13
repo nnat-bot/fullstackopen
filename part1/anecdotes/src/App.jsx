@@ -1,5 +1,10 @@
 import { useState } from 'react'
 
+const votes = [1, 4, 6, 3]
+
+const copy = [...votes]
+// increment the value in position 2 by one
+copy[2] += 1     
 
 const App = () => {
   const anecdotes = [
@@ -14,10 +19,18 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(8).fill(0))
 
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={() => {
+        const copy = [...votes]
+        copy[selected] +=1
+        setVotes(copy)
+      }}>vote</button>
+      
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote 
       </button>
     </div>
